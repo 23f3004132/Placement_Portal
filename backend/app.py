@@ -25,6 +25,13 @@ def create_app():
 
     initialize_database(app)
 
+
+    from resources import api_bp
+    app.register_blueprint(api_bp)
+
+    from scripts import initialize_database
+    initialize_database(app)
+
     return app
 
 app = create_app()
