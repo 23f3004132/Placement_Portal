@@ -5,7 +5,6 @@ from models import db, User, Student, Company
 
 
 class AuthService:
-
     @staticmethod
     def login(data):
         email = data.get('email', '').strip()
@@ -17,14 +16,13 @@ class AuthService:
             if not user.active:
                 return {'error': 'Your account has been blocked. Please contact the placement cell.'}, 403
 
-            # Company must be approved to log in
+            # Company log in
             if user.role == 'company' and user.company:
                 status = user.company.approval_status
                 if status == 'pending':
                     return {'error': 'Company registration pending admin approval.'}, 403
                 if status in ('rejected', 'blacklisted'):
                     return {'error': f'Company account has been {status}.'}, 403
-
             return {
                 'message': 'Login successful.',
                 'user_id': user.id,
@@ -49,22 +47,22 @@ class AuthService:
         datastore = app.datastore
         try:
             new_user = datastore.create_user(
-                name=name,
-                email=email,
-                password=hash_password(data.get('password')),
-                fs_uniquifier=str(uuid.uuid4()),
+                name = name,
+                email = email,
+                password = hash_password(data.get('password')),
+                fs_uniquifier = str(uuid.uuid4()),
             )
             datastore.add_role_to_user(new_user, 'student')
             db.session.flush()
 
             student = Student(
-                user_id        = new_user.id,
-                branch         = data.get('branch', ''),
-                cgpa           = float(data.get('cgpa') or 0.0),
-                year           = int(data.get('year') or 0) or None,
+                user_id = new_user.id,
+                branch = data.get('branch', ''),
+                cgpa = float(data.get('cgpa') or 0.0),
+                year = int(data.get('year') or 0) or None,
                 contact_number = data.get('contact_number', ''),
-                skills         = data.get('skills', ''),
-                address        = data.get('address', ''),
+                skills = data.get('skills', ''),
+                address = data.get('address', ''),
             )
             db.session.add(student)
             db.session.commit()
@@ -75,7 +73,7 @@ class AuthService:
 
     @staticmethod
     def register_company(data):
-        email        = data.get('email', '').strip()
+        email = data.get('email', '').strip()
         company_name = data.get('company_name', '').strip()
 
         if not email or not data.get('password') or not company_name:
@@ -87,17 +85,17 @@ class AuthService:
         datastore = app.datastore
         try:
             new_user = datastore.create_user(
-                name=company_name,
-                email=email,
-                password=hash_password(data.get('password')),
-                fs_uniquifier=str(uuid.uuid4()),
+                name = company_name,
+                email = email,
+                password = hash_password(data.get('password')),
+                fs_uniquifier = str(uuid.uuid4()),
             )
             datastore.add_role_to_user(new_user, 'company')
             db.session.flush()
 
             company = Company(
-                user_id         = new_user.id,
-                company_name    = company_name,
+                user_id = new_user.id,
+                company_name = company_name,
                 approval_status = 'pending',
             )
             db.session.add(company)
