@@ -2,8 +2,6 @@
 
 A fully functional, production-ready campus placement management system.
 
-**Architecture:** Mirrors the HMS reference repository — Flask-RESTful backend + Vue 3 + Vuex frontend.
-
 ---
 
 ## 📁 Project Structure
