@@ -6,7 +6,7 @@ def initialize_database(app):
     from extensions import db
 
     with app.app_context():
-        db.drop_all()
+        # db.drop_all()
         db.create_all()
 
         datastore = app.datastore

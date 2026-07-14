@@ -1,6 +1,8 @@
 from datetime import date 
 from models import db, PlacementDrive, Company
 from flask_security import current_user
+from extensions import cache
+from flask import current_app as app
 
 def _parse_date(value):  
     if not value:
@@ -17,13 +19,22 @@ class DriveService:
     def get_all_drives():
         try:
             role = current_user.role
+            # Cache drives list per role (and per company for company role)
+            cache_key = f"drives:{role}:{current_user.id if role == 'company' else 'all'}"
+            cached = cache.get(cache_key)
+            if cached is not None:
+                return {'data': cached}, 200
+
             if role == 'company':
                 drives = PlacementDrive.query.filter_by(company_id=current_user.id).all()
             elif role == 'student':
                 drives = PlacementDrive.query.filter_by(status='approved').all()
             else:
                 drives = PlacementDrive.query.all()
-            return {'data': [DriveService._serialize(d) for d in drives]}, 200
+
+            data = [DriveService._serialize(d) for d in drives]
+            cache.set(cache_key, data, timeout=app.config.get('CACHE_DEFAULT_TIMEOUT', 300))
+            return {'data': data}, 200
         except Exception as e:
             return {'error': str(e)}, 500
 
@@ -56,6 +67,11 @@ class DriveService:
             )
             db.session.add(drive)
             db.session.commit()
+        
+            try:
+                cache.clear()
+            except Exception:
+                pass
             return {'message': 'Drive created. Pending admin approval.'}, 201
         except Exception as e:
             db.session.rollback()
@@ -78,6 +94,10 @@ class DriveService:
                 else:
                     setattr(d, key, value)
             db.session.commit()
+            try:
+                cache.clear()
+            except Exception:
+                pass
             return {'message': 'Drive updated.'}, 200
         except Exception as e:
             db.session.rollback()
@@ -91,6 +111,10 @@ class DriveService:
         try:
             db.session.delete(d)
             db.session.commit()
+            try:
+                cache.clear()
+            except Exception:
+                pass
             return {'message': 'Drive deleted.'}, 200
         except Exception as e:
             db.session.rollback()

@@ -49,7 +49,7 @@ class Student(db.Model):
     contact_number = db.Column(db.String(20))
     skills = db.Column(db.String(500))
     address = db.Column(db.String(300))
-    resume_data = db.Column(db.Text)   # base64-encoded PDF
+    resume_data = db.Column(db.Text)   
 
     applications = db.relationship('Application', backref='student', cascade='all, delete-orphan', lazy=True)
 

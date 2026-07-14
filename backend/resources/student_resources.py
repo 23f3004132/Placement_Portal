@@ -3,6 +3,8 @@ from flask import request
 from flask_restful import Resource
 from flask_security import auth_required, roles_required, roles_accepted, current_user
 from services import StudentService
+from services import ExportService
+from flask import request
 
 
 class StudentListResource(Resource):
@@ -60,3 +62,22 @@ class StudentResumeResource(Resource):
         file.seek(0)
         b64 = 'data:application/pdf;base64,' + base64.b64encode(file.read()).decode('utf-8')
         return StudentService.save_resume(user_id, b64)
+
+
+class StudentExportResource(Resource):
+
+    @auth_required('token')
+    @roles_accepted('admin', 'student')
+    def post(self, user_id):
+        # Trigger export: students may only export their own data
+        if current_user.role == 'student' and current_user.id != user_id:
+            return {'error': 'Not authorized.'}, 403
+        return ExportService.trigger_export(user_id)
+
+    @auth_required('token')
+    @roles_accepted('admin', 'student')
+    def get(self, user_id, task_id=None):
+        path = request.path or ''
+        if path.rstrip('/').endswith('download'):
+            return ExportService.download_export(user_id, task_id)
+        return ExportService.get_export_status(user_id, task_id)
