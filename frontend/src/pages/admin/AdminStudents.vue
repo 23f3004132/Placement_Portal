@@ -96,17 +96,17 @@
 import { ref, computed, onMounted } from 'vue'
 import api from '@/utils/api'
 
-const students     = ref([])
-const loading      = ref(true)
-const search       = ref('')
-const modal        = ref(false)
-const sel          = ref({})
+const students = ref([])
+const loading = ref(true)
+const search = ref('')
+const modal = ref(false)
+const sel = ref({})
 const resumeLoading = ref(null)
-const pdfModal     = ref(false)
-const pdfSrc       = ref('')
-const pdfError     = ref('')
-const pdfName      = ref('')
-const pdfUserId    = ref(null)
+const pdfModal = ref(false)
+const pdfSrc = ref('')
+const pdfError = ref('')
+const pdfName = ref('')
+const pdfUserId = ref(null)
 
 const filtered = computed(() => {
   const q = search.value.toLowerCase()
@@ -142,8 +142,8 @@ async function viewResume(userId, name) {
 }
 async function downloadResume(userId, name) {
   try {
-    const b64   = await fetchResumeB64(userId)
-    const raw   = b64.split(',')[1]
+    const b64 = await fetchResumeB64(userId)
+    const raw  = b64.split(',')[1]
     const bytes = Uint8Array.from(atob(raw), c => c.charCodeAt(0))
     const blob  = new Blob([bytes], { type: 'application/pdf' })
     const a = document.createElement('a')

@@ -139,8 +139,8 @@ router.beforeEach((to) => {
   }
 
   const isAuthenticated = !!store.state.token
-  const role            = store.state.role
-  const dashboardRoute  = store.getters.dashboardRoute
+  const role = store.state.role
+  const dashboardRoute = store.getters.dashboardRoute
 
   if (to.meta?.requiresAuth && !isAuthenticated) return '/login'
   if (to.meta?.roles && !to.meta.roles.includes(role)) {

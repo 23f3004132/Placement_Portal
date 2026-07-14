@@ -35,15 +35,15 @@ import { ref } from 'vue'
 import { useStore }  from 'vuex'
 import { useRouter } from 'vue-router'
 
-const store   = useStore()
+const store = useStore()
 const router  = useRouter()
 const loading = ref(false)
-const error   = ref('')
-const form    = ref({ email: '', password: '' })
+const error = ref('')
+const form = ref({ email: '', password: '' })
 
 async function handleLogin() {
   loading.value = true
-  error.value   = ''
+  error.value = ''
   try {
     await store.dispatch('login', form.value)
     router.push(store.getters.dashboardRoute)

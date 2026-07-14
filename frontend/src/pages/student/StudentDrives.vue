@@ -176,22 +176,22 @@ import { ref, computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import api from '@/utils/api'
 
-const store        = useStore()
-const drives       = ref([])
+const store = useStore()
+const drives = ref([])
 const applications = ref([])
-const loading      = ref(true)
+const loading = ref(true)
 
-const search       = ref('')
+const search = ref('')
 const filterBranch = ref('')
-const filterCgpa   = ref('')
+const filterCgpa = ref('')
 
 const detailModal = ref(false)
-const applyModal  = ref(false)
-const applying    = ref(false)
-const applyError  = ref('')
-const applyOk     = ref('')
-const sel         = ref({})
-const pending     = ref(null)
+const applyModal = ref(false)
+const applying = ref(false)
+const applyError = ref('')
+const applyOk = ref('')
+const sel = ref({})
+const pending = ref(null)
 
 const appliedIds = computed(() => new Set(applications.value.map(a => a.drive_id)))
 
@@ -262,7 +262,7 @@ async function fetchData() {
       api.get('/drives'),
       api.get('/applications'),
     ])
-    if (dR.status === 'fulfilled') drives.value       = dR.value.data || []
+    if (dR.status === 'fulfilled') drives.value = dR.value.data || []
     if (aR.status === 'fulfilled') applications.value = aR.value.data || []
   } catch { /* silent */ }
   finally { loading.value = false }

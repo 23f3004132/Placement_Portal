@@ -132,26 +132,26 @@
 import { ref, computed, onMounted } from 'vue'
 import api from '@/utils/api'
 
-const loading      = ref(true)
-const companies    = ref([])
-const drives       = ref([])
+const loading = ref(true)
+const companies = ref([])
+const drives = ref([])
 const applications = ref([])
-const students     = ref([])
+const students = ref([])
 
-const searchQ       = ref('')
-const searchType    = ref('student')
+const searchQ = ref('')
+const searchType = ref('student')
 const searchResults = ref([])
-const searched      = ref(false)
+const searched = ref(false)
 
 const stats = computed(() => ({
-  students:     students.value.length,
-  companies:    companies.value.length,
-  drives:       drives.value.length,
+  students: students.value.length,
+  companies: companies.value.length,
+  drives: drives.value.length,
   applications: applications.value.length,
 }))
 
 const pendingCompanies = computed(() => companies.value.filter(c => c.approval_status === 'pending'))
-const pendingDrives    = computed(() => drives.value.filter(d => d.status === 'pending'))
+const pendingDrives = computed(() => drives.value.filter(d => d.status === 'pending'))
 
 const searchColMap = {
   student: { cols: ['Name','Email','Branch','CGPA','Status'], keys: ['name','email','branch','cgpa','active'] },
@@ -170,10 +170,10 @@ async function fetchAll() {
       api.get('/companies'), api.get('/drives'),
       api.get('/applications'), api.get('/students'),
     ])
-    if (c.status === 'fulfilled') companies.value    = c.value.data || []
-    if (d.status === 'fulfilled') drives.value       = d.value.data || []
+    if (c.status === 'fulfilled') companies.value = c.value.data || []
+    if (d.status === 'fulfilled') drives.value = d.value.data || []
     if (a.status === 'fulfilled') applications.value = a.value.data || []
-    if (s.status === 'fulfilled') students.value     = s.value.data || []
+    if (s.status === 'fulfilled') students.value = s.value.data || []
   } finally { loading.value = false }
 }
 

@@ -127,22 +127,22 @@ import { ref, computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import api from '@/utils/api'
 
-const store          = useStore()
-const student        = ref({})
-const drives         = ref([])
-const applications   = ref([])
+const store = useStore()
+const student = ref({})
+const drives = ref([])
+const applications = ref([])
 const loadingProfile = ref(true)
-const loadingDrives  = ref(true)
-const loadingApps    = ref(true)
-const applyModal     = ref(false)
-const applying       = ref(false)
-const applyError     = ref('')
-const applyOk        = ref('')
-const pending        = ref(null)
+const loadingDrives = ref(true)
+const loadingApps = ref(true)
+const applyModal = ref(false)
+const applying = ref(false)
+const applyError = ref('')
+const applyOk = ref('')
+const pending = ref(null)
 
-const openDrives  = computed(() => drives.value.filter(d => d.status === 'approved'))
-const appliedIds  = computed(() => new Set(applications.value.map(a => a.drive_id)))
-const selected    = computed(() => applications.value.filter(a => a.status === 'selected').length)
+const openDrives = computed(() => drives.value.filter(d => d.status === 'approved'))
+const appliedIds = computed(() => new Set(applications.value.map(a => a.drive_id)))
+const selected = computed(() => applications.value.filter(a => a.status === 'selected').length)
 const shortlisted = computed(() => applications.value.filter(a => a.status === 'shortlisted').length)
 
 const fmtDate = d => d

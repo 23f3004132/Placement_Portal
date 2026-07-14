@@ -37,14 +37,14 @@
             <td>{{ d.applicant_count }}</td>
             <td><span :class="['status', d.status]">{{ d.status }}</span></td>
             <td>
-              <button class="action-btn action-view"    @click="viewDrive(d)">View</button>
+              <button class="action-btn action-view" @click="viewDrive(d)">View</button>
               <button v-if="d.status === 'pending'"
                 class="action-btn action-approve" @click="updateDrive(d.id,'approved')">Approve</button>
               <button v-if="d.status === 'pending'"
-                class="action-btn action-reject"  @click="updateDrive(d.id,'rejected')">Reject</button>
+                class="action-btn action-reject" @click="updateDrive(d.id,'rejected')">Reject</button>
               <button v-if="d.status === 'approved'"
-                class="action-btn action-close"   @click="updateDrive(d.id,'closed')">Close</button>
-              <button class="action-btn action-delete"  @click="deleteDrive(d.id)">Delete</button>
+                class="action-btn action-close" @click="updateDrive(d.id,'closed')">Close</button>
+              <button class="action-btn action-delete" @click="deleteDrive(d.id)">Delete</button>
             </td>
           </tr>
         </tbody>
@@ -94,13 +94,13 @@
 import { ref, computed, onMounted } from 'vue'
 import api from '@/utils/api'
 
-const drives       = ref([])
-const loading      = ref(true)
-const search       = ref('')
+const drives = ref([])
+const loading = ref(true)
+const search = ref('')
 const filterStatus = ref('')
-const modal        = ref(false)
-const sel          = ref({})
-const statuses     = ['pending', 'approved', 'rejected', 'closed']
+const modal = ref(false)
+const sel = ref({})
+const statuses = ['pending', 'approved', 'rejected', 'closed']
 
 const filtered = computed(() => {
   let list = drives.value

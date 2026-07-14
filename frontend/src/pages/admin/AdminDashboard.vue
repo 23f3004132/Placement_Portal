@@ -5,10 +5,10 @@
         <span class="navbar-brand">Placement Portal</span>
         <span class="navbar-welcome">Welcome, {{ store.state.name }}</span>
         <ul class="nav-links">
-          <li><router-link to="/admin_dashboard/home"         class="nav-link">Dashboard</router-link></li>
-          <li><router-link to="/admin_dashboard/companies"    class="nav-link">Companies</router-link></li>
-          <li><router-link to="/admin_dashboard/students"     class="nav-link">Students</router-link></li>
-          <li><router-link to="/admin_dashboard/drives"       class="nav-link">Drives</router-link></li>
+          <li><router-link to="/admin_dashboard/home" class="nav-link">Dashboard</router-link></li>
+          <li><router-link to="/admin_dashboard/companies" class="nav-link">Companies</router-link></li>
+          <li><router-link to="/admin_dashboard/students" class="nav-link">Students</router-link></li>
+          <li><router-link to="/admin_dashboard/drives" class="nav-link">Drives</router-link></li>
           <li><button class="logout-btn nav-link" @click="logout">Logout</button></li>
         </ul>
       </div>

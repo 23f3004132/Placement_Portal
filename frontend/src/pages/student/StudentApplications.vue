@@ -95,14 +95,14 @@ import { ref, computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import api from '@/utils/api'
 
-const store        = useStore()
+const store = useStore()
 const applications = ref([])
-const loading      = ref(true)
+const loading = ref(true)
 const filterStatus = ref('')
-const statuses     = ['applied', 'shortlisted', 'selected', 'rejected']
+const statuses = ['applied', 'shortlisted', 'selected', 'rejected']
 
-const exporting    = ref(false)
-const exportMsg    = ref('')
+const exporting = ref(false)
+const exportMsg = ref('')
 const exportMsgType = ref('info')
 const exportReady  = ref(false)
 const exportTaskId = ref('')
@@ -114,10 +114,10 @@ const filtered = computed(() => {
 })
 
 const summary = computed(() => [
-  { label: 'Total',       val: applications.value.length,                                               color: '#3498db' },
-  { label: 'Shortlisted', val: applications.value.filter(a => a.status === 'shortlisted').length,       color: '#e67e22' },
-  { label: 'Selected',    val: applications.value.filter(a => a.status === 'selected').length,          color: '#27ae60' },
-  { label: 'Rejected',    val: applications.value.filter(a => a.status === 'rejected').length,          color: '#e74c3c' },
+  { label: 'Total', val: applications.value.length, color: '#3498db' },
+  { label: 'Shortlisted', val: applications.value.filter(a => a.status === 'shortlisted').length, color: '#e67e22' },
+  { label: 'Selected', val: applications.value.filter(a => a.status === 'selected').length, color: '#27ae60' },
+  { label: 'Rejected', val: applications.value.filter(a => a.status === 'rejected').length, color: '#e74c3c' },
 ])
 
 const fmtDate = d => d
@@ -125,10 +125,10 @@ const fmtDate = d => d
   : '—'
 
 const statusColor = s => ({
-  applied:     '#3498db',
+  applied: '#3498db',
   shortlisted: '#e67e22',
-  selected:    '#27ae60',
-  rejected:    '#e74c3c',
+  selected: '#27ae60',
+  rejected: '#e74c3c',
 }[s] || '#bdc3c7')
 
 async function fetchApplications() {
@@ -159,16 +159,16 @@ async function triggerExport() {
 
   try {
     const uid = store.state.userId
-    const r   = await api.post(`/students/${uid}/export-csv`)
+    const r = await api.post(`/students/${uid}/export-csv`)
     exportTaskId.value = r.task_id
-    exportMsg.value  = '⏳ Export in progress… please wait.'
+    exportMsg.value  = ' Export in progress… please wait.'
 
     // Poll every 2 s
     pollInterval = setInterval(() => pollExport(uid, r.task_id), 2000)
   } catch (e) {
-    exportMsg.value     = ' ' + (e.message || 'Export failed.')
+    exportMsg.value = ' ' + (e.message || 'Export failed.')
     exportMsgType.value = 'error'
-    exporting.value     = false
+    exporting.value = false
   }
 }
 
@@ -178,14 +178,14 @@ async function pollExport(uid, taskId) {
     const d = r.data
     if (d.status === 'SUCCESS' && d.download_ready) {
       clearInterval(pollInterval)
-      exportReady.value   = true
-      exporting.value     = false
-      exportMsg.value     = 'Export ready! Click Download to save your CSV.'
+      exportReady.value = true
+      exporting.value = false
+      exportMsg.value = 'Export ready! Click Download to save your CSV.'
       exportMsgType.value = 'success'
     } else if (d.status === 'FAILURE') {
       clearInterval(pollInterval)
-      exporting.value     = false
-      exportMsg.value     = ' Export failed: ' + (d.error || 'Unknown error')
+      exporting.value  = false
+      exportMsg.value = ' Export failed: ' + (d.error || 'Unknown error')
       exportMsgType.value = 'error'
     }
   } catch { /* keep polling */ }

@@ -1,7 +1,7 @@
 * { box-sizing: border-box; }
 body { font-family: 'Segoe UI', sans-serif; margin: 0; }
 
-/* ── Auth pages ────────────────────────── */
+/* ── Auth pages  */
 .theme-gradient-bg { background: linear-gradient(135deg, #667eea, #764ba2); }
 .full-page-center  { min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 1rem; }
 
@@ -27,7 +27,7 @@ body { font-family: 'Segoe UI', sans-serif; margin: 0; }
 .role-toggle-btn     { flex: 1; padding: .6rem; border: none; background: #fff; color: #667eea; font-weight: 600; cursor: pointer; transition: all .2s; }
 .role-toggle-btn.active { background: #667eea; color: #fff; }
 
-/* ── Dashboard shell ───────────────────── */
+/* ── Dashboard shell  */
 .user-dashboard    { display: flex; flex-direction: column; min-height: 100vh; background: #f5f5f5; }
 .navbar            { background: #2c3e50; padding: 0; box-shadow: 0 2px 5px rgba(0,0,0,.1); }
 .navbar-container  { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; }
@@ -41,7 +41,7 @@ body { font-family: 'Segoe UI', sans-serif; margin: 0; }
 .logout-btn:hover  { background: #e74c3c; }
 .user-content      { flex: 1; padding: 2rem; max-width: 1400px; width: 100%; margin: 0 auto; }
 
-/* ── Cards / pages ─────────────────────── */
+/* ── Cards / pages */
 .user-page         { background: #fff; padding: 2rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,.1); }
 .page-header       { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
 .page-title        { color: #2c3e50; font-size: 1.8rem; margin: 0; }
@@ -50,7 +50,7 @@ h3                 { margin: 0; color: #2c3e50; }
 .detail-text       { color: #2c3e50; margin: .6rem 0 1rem; }
 .section-title     { color: #2c3e50; margin: .6rem 0 .8rem; font-size: 1rem; font-weight: 600; }
 
-/* ── Buttons ───────────────────────────── */
+/* ── Buttons  */
 .btn-add           { background: #27ae60; color: #fff; border: none; padding: .7rem 1.5rem; border-radius: 5px; cursor: pointer; font-weight: 600; }
 .btn-add:hover     { background: #229954; }
 .btn-primary       { flex: 1; border: none; padding: .7rem; border-radius: 5px; cursor: pointer; font-weight: 600; background: #3498db; color: #fff; }
@@ -70,7 +70,7 @@ h3                 { margin: 0; color: #2c3e50; }
 .link-btn          { background: none; border: none; color: #2980b9; cursor: pointer; text-decoration: underline; font-weight: 600; padding: 0; }
 .link-btn:hover    { color: #1f5f8b; }
 
-/* ── Toolbar ───────────────────────────── */
+/* ── Toolbar  */
 .toolbar         { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem; }
 .toolbar-fields  { display: flex; gap: .75rem; flex: 1; min-width: 280px; }
 .toolbar-input, .toolbar-select { border: 1px solid #bdc3c7; border-radius: 5px; padding: .65rem .75rem; font-size: .95rem; width: 100%; font-family: inherit; }
@@ -78,7 +78,7 @@ h3                 { margin: 0; color: #2c3e50; }
 .toolbar-actions { display: flex; gap: .75rem; }
 .toolbar-actions .btn-primary, .toolbar-actions .btn-secondary { flex: none; padding: .65rem 1rem; }
 
-/* ── Modal ─────────────────────────────── */
+/* ── Modal  */
 .modal-overlay   { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,.5); display: flex; justify-content: center; align-items: center; z-index: 1000; }
 .modal-card      { background: #fff; padding: 2rem; border-radius: 10px; width: 100%; max-width: 500px; box-shadow: 0 5px 30px rgba(0,0,0,.3); max-height: 90vh; overflow-y: auto; }
 .modal-content   { max-width: 900px; }
@@ -87,7 +87,7 @@ h3                 { margin: 0; color: #2c3e50; }
 .close-btn:hover { color: #333; }
 .modal-actions   { display: flex; align-items: center; gap: .5rem; }
 
-/* ── Forms ─────────────────────────────── */
+/* ── Forms  */
 .form-stack                  { display: flex; flex-direction: column; gap: 1rem; }
 .form-group                  { display: flex; flex-direction: column; }
 .form-group label            { margin-bottom: .5rem; color: #2c3e50; font-weight: 600; font-size: .9rem; }
@@ -101,7 +101,7 @@ h3                 { margin: 0; color: #2c3e50; }
 .form-row                    { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 .form-hint                   { font-size: .78rem; color: #7f8c8d; margin-top: .25rem; }
 
-/* ── Tables ─────────────────────────────── */
+/* ── Tables  */
 .table-wrap               { margin-top: 1.5rem; overflow-x: auto; }
 .data-table               { width: 100%; border-collapse: collapse; }
 .data-table th, .data-table td { border: 1px solid #ddd; padding: .8rem; text-align: left; }
@@ -109,7 +109,7 @@ h3                 { margin: 0; color: #2c3e50; }
 .data-table tbody tr:hover { background: #f9f9f9; }
 .data-table td.empty-state { text-align: center; color: #7f8c8d; font-style: italic; padding: 2rem; }
 
-/* ── Status badges ─────────────────────── */
+/* ── Status badges  */
 .status            { padding: .3rem .8rem; border-radius: 20px; font-size: .82rem; font-weight: 600; display: inline-block; }
 .status.pending    { background: #fff3cd; color: #856404; }
 .status.approved   { background: #d4edda; color: #155724; }
@@ -122,7 +122,7 @@ h3                 { margin: 0; color: #2c3e50; }
 .status.active     { background: #d4edda; color: #155724; }
 .status.blocked    { background: #f8d7da; color: #721c24; }
 
-/* ── Stats grid ─────────────────────────── */
+/* ── Stats grid  */
 .stats-grid    { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap: 1.5rem; margin-bottom: 2rem; }
 .stat-card     { background: #fff; border-radius: 10px; padding: 1.5rem; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,.08); }
 .stat-num      { font-size: 2.5rem; font-weight: bold; }
@@ -133,7 +133,7 @@ h3                 { margin: 0; color: #2c3e50; }
 .stat-purple .stat-num { color: #9b59b6; }
 .stat-red .stat-num    { color: #e74c3c; }
 
-/* ── Landing page ────────────────────────── */
+/* ── Landing page */
 .landing-page    { min-height: 100vh; display: flex; flex-direction: column; }
 .landing-hero    { flex: 1; display: flex; flex-direction: column; justify-content: center; color: #fff; text-align: center; padding: 4rem 2rem; }
 .hero-content h1 { font-size: 3rem; margin-bottom: 1rem; }
@@ -147,29 +147,29 @@ h3                 { margin: 0; color: #2c3e50; }
 .landing-btn-secondary:hover{ background: #fff; color: #667eea; }
 .site-footer     { background: #2c3e50; color: #fff; text-align: center; padding: 2rem; }
 
-/* ── Profile / detail ───────────────────── */
+/* ── Profile / detail  */
 .profile-grid  { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: .65rem 1rem; margin-bottom: 1rem; }
 .profile-field { display: flex; flex-direction: column; }
 .profile-field span:first-child { font-size: .78rem; color: #7f8c8d; text-transform: uppercase; letter-spacing: .4px; font-weight: 600; }
 .profile-field span:last-child  { font-weight: 600; color: #2c3e50; margin-top: .15rem; }
 
-/* ── Resume ──────────────────────────────── */
+/* ── Resume */
 .resume-drop-zone       { border: 2px dashed #bdc3c7; border-radius: 8px; padding: 1.5rem; text-align: center; cursor: pointer; transition: border-color .2s; background: #fafafa; }
 .resume-drop-zone:hover, .resume-drop-zone.drag-over { border-color: #3498db; background: #f0f7ff; }
 .resume-drop-zone.has-file { border-color: #27ae60; background: #f0fff4; }
 
-/* ── Skill tags ──────────────────────────── */
+/* ── Skill tags */
 .skill-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .5rem; }
 .skill-tag  { background: #e8f4fd; color: #2980b9; padding: .2rem .7rem; border-radius: 20px; font-size: .82rem; font-weight: 600; }
 
-/* ── Alert strip ─────────────────────────── */
+/* ── Alert strip */
 .alert-strip      { padding: .85rem 1.2rem; border-radius: 6px; margin-bottom: 1.2rem; font-size: .9rem; }
 .alert-strip.warn { background: #fff3cd; color: #856404; border-left: 4px solid #ffc107; }
 .alert-strip.info { background: #cfe2ff; color: #084298; border-left: 4px solid #3498db; }
 .alert-strip.success { background: #d4edda; color: #155724; border-left: 4px solid #27ae60; }
 .alert-strip.error   { background: #f8d7da; color: #721c24; border-left: 4px solid #e74c3c; }
 
-/* ── Responsive ──────────────────────────── */
+/* Responsive */
 @media (max-width: 768px) {
   .user-page { padding: 1rem; }
   .page-header { flex-direction: column; gap: 1rem; align-items: flex-start; }

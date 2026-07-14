@@ -21,7 +21,7 @@
       <form v-if="role === 'student'" @submit.prevent="handleRegister">
         <div class="auth-form-group">
           <label>Full Name *</label>
-          <input v-model="student.name" type="text" class="auth-field" placeholder="Rahul Sharma" required />
+          <input v-model="student.name" type="text" class="auth-field" placeholder="XYZ" required />
         </div>
         <div class="auth-form-group">
           <label>Email Address *</label>
@@ -29,7 +29,7 @@
         </div>
         <div class="auth-form-group">
           <label>Password *</label>
-          <input v-model="student.password" type="password" class="auth-field" placeholder="Min 6 characters" required minlength="6" />
+          <input v-model="student.password" type="password" class="auth-field" placeholder="••••••••" />
         </div>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:.75rem;">
           <div class="auth-form-group">
@@ -49,7 +49,7 @@
           </div>
           <div class="auth-form-group">
             <label>Contact Number</label>
-            <input v-model="student.contact_number" type="tel" class="auth-field" placeholder="+91 9876543210" />
+            <input v-model="student.contact_number" type="tel" class="auth-field" placeholder="+91 1234567890" />
           </div>
         </div>
         <div class="auth-form-group">
@@ -73,7 +73,7 @@
         </div>
         <div class="auth-form-group">
           <label>Company Email *</label>
-          <input v-model="company.email" type="email" class="auth-field" placeholder="hr@yourcompany.com" required />
+          <input v-model="company.email" type="email" class="auth-field" placeholder="company@gmail.com" required />
         </div>
         <div class="auth-form-group">
           <label>Password *</label>
@@ -100,11 +100,11 @@ import { ref } from 'vue'
 import { useStore }  from 'vuex'
 import { useRouter } from 'vue-router'
 
-const store   = useStore()
-const router  = useRouter()
-const role    = ref('student')
+const store = useStore()
+const router = useRouter()
+const role = ref('student')
 const loading = ref(false)
-const error   = ref('')
+const error = ref('')
 const success = ref('')
 
 const blankStudent = () => ({ name:'', email:'', password:'', branch:'', cgpa:'', year:'', contact_number:'', skills:'', address:'' })
@@ -114,8 +114,8 @@ const student = ref(blankStudent())
 const company = ref(blankCompany())
 
 function switchRole(r) {
-  role.value    = r
-  error.value   = ''
+  role.value = r
+  error.value = ''
   success.value = ''
   student.value = blankStudent()
   company.value = blankCompany()

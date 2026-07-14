@@ -85,13 +85,13 @@
 import { ref, computed, onMounted } from 'vue'
 import api from '@/utils/api'
 
-const companies    = ref([])
-const loading      = ref(true)
-const search       = ref('')
+const companies = ref([])
+const loading = ref(true)
+const search = ref('')
 const filterStatus = ref('')
-const modal        = ref(false)
-const sel          = ref({})
-const statuses     = ['pending','approved','rejected','blacklisted']
+const modal = ref(false)
+const sel = ref({})
+const statuses = ['pending','approved','rejected','blacklisted']
 
 const filtered = computed(() => {
   let list = companies.value

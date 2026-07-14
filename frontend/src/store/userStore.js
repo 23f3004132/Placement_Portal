@@ -9,25 +9,25 @@ const dashboardByRole = {
 
 export default createStore({
   state: {
-    token:  localStorage.getItem('access_token') || null,
-    userId: localStorage.getItem('user_id')      || null,
-    role:   localStorage.getItem('user_role')    || null,
-    name:   localStorage.getItem('user_name')    || null,
+    token: localStorage.getItem('access_token') || null,
+    userId: localStorage.getItem('user_id') || null,
+    role: localStorage.getItem('user_role') || null,
+    name: localStorage.getItem('user_name') || null,
   },
 
   getters: {
     isAuthenticated: (state) => !!state.token,
-    dashboardRoute:  (state) => dashboardByRole[state.role] || '/',
-    isAdmin:         (state) => state.role === 'admin',
-    isCompany:       (state) => state.role === 'company',
-    isStudent:       (state) => state.role === 'student',
+    dashboardRoute: (state) => dashboardByRole[state.role] || '/',
+    isAdmin: (state) => state.role === 'admin',
+    isCompany: (state) => state.role === 'company',
+    isStudent: (state) => state.role === 'student',
   },
 
   mutations: {
     SET_AUTH(state, { token, userId, role, name }) {
       state.token  = token  || null
       state.userId = userId || null
-      state.role   = role   || null
+      state.role = role   || null
       state.name   = name   || null
       if (state.token)  localStorage.setItem('access_token', state.token)
       else              localStorage.removeItem('access_token')
@@ -54,8 +54,8 @@ export default createStore({
       const response = await api.post('/login', credentials)
       const token  = response?.access_token || response?.token
       const userId = response?.user_id
-      const role   = response?.role
-      const name   = response?.name
+      const role = response?.role
+      const name  = response?.name
       if (response?.error) throw new Error(response.error)
       if (!token) throw new Error('Login response did not include a token.')
       commit('SET_AUTH', { token, userId, role, name })

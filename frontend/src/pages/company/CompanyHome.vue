@@ -4,7 +4,6 @@
       <h2 class="page-title">Company Dashboard</h2>
     </div>
 
-    <!-- Approval banner -->
     <div v-if="company.approval_status === 'pending'"    class="alert-strip warn">
       Your company registration is pending admin approval. You can create drives once approved.
     </div>
@@ -50,7 +49,7 @@
         </div>
       </div>
       <router-link to="/company_dashboard/profile" class="action-btn action-edit" style="display:inline-block; margin-top:.75rem;">
-        ✏ Edit Profile
+         Edit Profile
       </router-link>
     </div>
 
@@ -106,17 +105,17 @@ import { ref, computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import api from '@/utils/api'
 
-const store          = useStore()
-const company        = ref({})
-const drives         = ref([])
-const applications   = ref([])
+const store = useStore()
+const company = ref({})
+const drives = ref([])
+const applications = ref([])
 const loadingProfile = ref(true)
-const loadingDrives  = ref(true)
-const loadingApps    = ref(true)
+const loadingDrives = ref(true)
+const loadingApps = ref(true)
 
 const totalApplicants = computed(() => drives.value.reduce((s, d) => s + (d.applicant_count || 0), 0))
-const shortlisted     = computed(() => applications.value.filter(a => a.status === 'shortlisted').length)
-const selected        = computed(() => applications.value.filter(a => a.status === 'selected').length)
+const shortlisted = computed(() => applications.value.filter(a => a.status === 'shortlisted').length)
+const selected = computed(() => applications.value.filter(a => a.status === 'selected').length)
 
 const fmtDate = d => d
   ? new Date(d).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })

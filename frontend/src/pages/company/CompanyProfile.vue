@@ -5,8 +5,8 @@
     </div>
 
     <div v-if="success" class="alert-strip success">{{ success }}</div>
-    <div v-if="error"   class="alert-strip error">{{ error }}</div>
-    <p v-if="loading"   class="loading-text">Loading profile…</p>
+    <div v-if="error" class="alert-strip error">{{ error }}</div>
+    <p v-if="loading" class="loading-text">Loading profile…</p>
 
     <form v-else class="form-stack" @submit.prevent="save" style="max-width:680px;">
       <h3 class="section-title">Company Information</h3>
@@ -67,11 +67,11 @@ import { ref, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import api from '@/utils/api'
 
-const store   = useStore()
+const store = useStore()
 const loading = ref(true)
 const saving  = ref(false)
 const success = ref('')
-const error   = ref('')
+const error = ref('')
 
 const form = ref({
   company_name: '', industry: '', location: '', website: '',
@@ -86,13 +86,13 @@ async function loadProfile() {
     const d = r.data || {}
     form.value = {
       company_name: d.company_name || '',
-      industry:     d.industry     || '',
-      location:     d.location     || '',
-      website:      d.website      || '',
-      hr_contact:   d.hr_contact   || '',
-      hr_email:     d.hr_email     || '',
-      description:  d.description  || '',
-      password:     '',
+      industry: d.industry     || '',
+      location: d.location     || '',
+      website: d.website      || '',
+      hr_contact: d.hr_contact   || '',
+      hr_email: d.hr_email     || '',
+      description: d.description  || '',
+      password: '',
     }
   } catch (e) { error.value = 'Could not load profile.' }
   finally { loading.value = false }

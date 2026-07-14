@@ -51,11 +51,11 @@ const api = {
     }
   },
 
-  get(endpoint, options = {})         { return this.request(endpoint, { ...options, method: 'GET' }) },
+  get(endpoint, options = {}) { return this.request(endpoint, { ...options, method: 'GET' }) },
   post(endpoint, data = {}, opts = {}) { return this.request(endpoint, { ...opts, method: 'POST',  body: JSON.stringify(data) }) },
   put(endpoint,  data = {}, opts = {}) { return this.request(endpoint, { ...opts, method: 'PUT',   body: JSON.stringify(data) }) },
   patch(endpoint,data = {}, opts = {}) { return this.request(endpoint, { ...opts, method: 'PATCH', body: JSON.stringify(data) }) },
-  delete(endpoint, opts = {})          { return this.request(endpoint, { ...opts, method: 'DELETE' }) },
+  delete(endpoint, opts = {}) { return this.request(endpoint, { ...opts, method: 'DELETE' }) },
 
   async upload(endpoint, formData) {
     const url = buildUrl(endpoint)

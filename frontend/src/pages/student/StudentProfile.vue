@@ -176,29 +176,28 @@ import api from '@/utils/api'
 
 const store = useStore()
 
-/* ── profile state ── */
+
 const form = ref({
   name:'', email:'', contact_number:'', address:'',
   branch:'', cgpa:'', year:'', skills:'', password:'',
 })
 const loadingProfile = ref(true)
-const saving         = ref(false)
-const saveSuccess    = ref('')
-const saveError      = ref('')
-const hasResume      = ref(false)
+const saving = ref(false)
+const saveSuccess = ref('')
+const saveError = ref('')
+const hasResume = ref(false)
 
-/* ── resume upload state ── */
-const pickedFile    = ref(null)
-const uploading     = ref(false)
-const uploadError   = ref('')
+
+const pickedFile = ref(null)
+const uploading = ref(false)
+const uploadError = ref('')
 const uploadSuccess = ref('')
-const dragging      = ref(false)
-const fileInput     = ref(null)
+const dragging = ref(false)
+const fileInput = ref(null)
 const resumeLoading = ref(false)
 
-/* ── PDF viewer state ── */
 const pdfModal = ref(false)
-const pdfSrc   = ref('')
+const pdfSrc = ref('')
 const pdfError = ref('')
 
 /* ── computed ── */
@@ -207,15 +206,15 @@ const skillTags = computed(() =>
 )
 
 const checklist = computed(() => [
-  { label: 'Full Name',      done: !!form.value.name },
-  { label: 'Email',          done: !!form.value.email },
-  { label: 'Branch',         done: !!form.value.branch },
-  { label: 'CGPA',           done: !!form.value.cgpa },
-  { label: 'Year',           done: !!form.value.year },
+  { label: 'Full Name', done: !!form.value.name },
+  { label: 'Email', done: !!form.value.email },
+  { label: 'Branch', done: !!form.value.branch },
+  { label: 'CGPA', done: !!form.value.cgpa },
+  { label: 'Year', done: !!form.value.year },
   { label: 'Contact Number', done: !!form.value.contact_number },
-  { label: 'Address',        done: !!form.value.address },
-  { label: 'Skills',         done: skillTags.value.length > 0 },
-  { label: 'Resume PDF',     done: hasResume.value },
+  { label: 'Address', done: !!form.value.address },
+  { label: 'Skills', done: skillTags.value.length > 0 },
+  { label: 'Resume PDF', done: hasResume.value },
 ])
 
 const completeness = computed(() => {
@@ -223,12 +222,11 @@ const completeness = computed(() => {
   return Math.round((done / checklist.value.length) * 100)
 })
 
-/* ── helpers ── */
 const fmtSize = bytes => bytes < 1024 * 1024
   ? (bytes / 1024).toFixed(1) + ' KB'
   : (bytes / (1024 * 1024)).toFixed(1) + ' MB'
 
-/* ── load profile ── */
+
 async function loadProfile() {
   loadingProfile.value = true
   saveSuccess.value = ''; saveError.value = ''
@@ -236,15 +234,15 @@ async function loadProfile() {
     const r = await api.get(`/students/${store.state.userId}`)
     const d = r.data || {}
     form.value = {
-      name:           d.name           || '',
-      email:          d.email          || '',
+      name: d.name  || '',
+      email: d.email || '',
       contact_number: d.contact_number || '',
-      address:        d.address        || '',
-      branch:         d.branch         || '',
-      cgpa:           d.cgpa           || '',
-      year:           d.year           || '',
-      skills:         d.skills         || '',
-      password:       '',
+      address: d.address || '',
+      branch: d.branch || '',
+      cgpa: d.cgpa || '',
+      year: d.year || '',
+      skills: d.skills || '',
+      password: '',
     }
     hasResume.value = d.has_resume || false
   } catch (e) {
@@ -254,7 +252,6 @@ async function loadProfile() {
   }
 }
 
-/* ── save profile ── */
 async function saveProfile() {
   saving.value = true; saveSuccess.value = ''; saveError.value = ''
   try {
@@ -270,7 +267,6 @@ async function saveProfile() {
   }
 }
 
-/* ── file picking ── */
 function onFilePicked(e) {
   const file = e.target.files[0]
   if (file) validateFile(file)
@@ -291,7 +287,6 @@ function validateFile(file) {
   pickedFile.value = file
 }
 
-/* ── upload resume ── */
 async function uploadResume() {
   if (!pickedFile.value) return
   uploading.value = true; uploadError.value = ''; uploadSuccess.value = ''
@@ -309,7 +304,6 @@ async function uploadResume() {
   }
 }
 
-/* ── view / download resume ── */
 async function viewResume() {
   resumeLoading.value = true; pdfError.value = ''
   try {

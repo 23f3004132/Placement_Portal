@@ -136,17 +136,17 @@ import { ref, computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import api from '@/utils/api'
 
-const store      = useStore()
-const drives     = ref([])
-const company    = ref(null)
-const loading    = ref(true)
+const store = useStore()
+const drives = ref([])
+const company = ref(null)
+const loading = ref(true)
 const formModal  = ref(false)
-const viewModal  = ref(false)
-const editing    = ref(false)
-const editId     = ref(null)
-const saving     = ref(false)
-const formError  = ref('')
-const sel        = ref({})
+const viewModal = ref(false)
+const editing = ref(false)
+const editId = ref(null)
+const saving = ref(false)
+const formError = ref('')
+const sel = ref({})
 
 const isApproved = computed(() => company.value?.approval_status === 'approved')
 
@@ -187,7 +187,7 @@ async function saveDrive() {
   try {
     const payload = { ...form.value, company_id: store.state.userId }
     if (editing.value) await api.patch(`/drives/${editId.value}`, payload)
-    else               await api.post('/drives', payload)
+    else await api.post('/drives', payload)
     formModal.value = false; load()
   } catch (e) { formError.value = e.message || 'Error saving drive.' }
   finally { saving.value = false }

@@ -110,23 +110,23 @@ import { ref, computed, onMounted } from 'vue'
 import api from '@/utils/api'
 
 const applications = ref([])
-const myDrives     = ref([])
-const loading      = ref(true)
-const search       = ref('')
+const myDrives = ref([])
+const loading = ref(true)
+const search = ref('')
 const filterDrive  = ref('')
 const filterStatus = ref('')
-const statuses     = ['applied', 'shortlisted', 'selected', 'rejected']
+const statuses = ['applied', 'shortlisted', 'selected', 'rejected']
 
 const resumeLoading = ref(null)
-const pdfModal      = ref(false)
-const pdfSrc        = ref('')
-const pdfError      = ref('')
-const pdfName       = ref('')
+const pdfModal = ref(false)
+const pdfSrc = ref('')
+const pdfError = ref('')
+const pdfName = ref('')
 
 const filtered = computed(() => {
   let list = applications.value
   if (filterDrive.value)  list = list.filter(a => a.drive_id  === Number(filterDrive.value))
-  if (filterStatus.value) list = list.filter(a => a.status    === filterStatus.value)
+  if (filterStatus.value) list = list.filter(a => a.status === filterStatus.value)
   const q = search.value.toLowerCase()
   if (q) list = list.filter(a =>
     a.student_name?.toLowerCase().includes(q) ||
@@ -136,10 +136,10 @@ const filtered = computed(() => {
 })
 
 const summary = computed(() => [
-  { label: 'Total',       val: applications.value.length,                                                color: '#3498db' },
-  { label: 'Shortlisted', val: applications.value.filter(a => a.status === 'shortlisted').length,        color: '#e67e22' },
-  { label: 'Selected',    val: applications.value.filter(a => a.status === 'selected').length,           color: '#27ae60' },
-  { label: 'Rejected',    val: applications.value.filter(a => a.status === 'rejected').length,           color: '#e74c3c' },
+  { label: 'Total', val: applications.value.length,  color: '#3498db' },
+  { label: 'Shortlisted', val: applications.value.filter(a => a.status === 'shortlisted').length, color: '#e67e22' },
+  { label: 'Selected', val: applications.value.filter(a => a.status === 'selected').length, color: '#27ae60' },
+  { label: 'Rejected', val: applications.value.filter(a => a.status === 'rejected').length, color: '#e74c3c' },
 ])
 
 const fmtDate = d => d
@@ -151,7 +151,7 @@ async function load() {
   try {
     const [aR, dR] = await Promise.allSettled([api.get('/applications'), api.get('/drives')])
     if (aR.status === 'fulfilled') applications.value = aR.value.data || []
-    if (dR.status === 'fulfilled') myDrives.value     = dR.value.data || []
+    if (dR.status === 'fulfilled') myDrives.value = dR.value.data || []
   } finally { loading.value = false }
 }
 
@@ -164,8 +164,8 @@ async function viewResume(studentId, name) {
   resumeLoading.value = studentId; pdfError.value = ''
   try {
     const r   = await api.get(`/students/${studentId}/resume`)
-    pdfSrc.value   = r.data.resume
-    pdfName.value  = name
+    pdfSrc.value = r.data.resume
+    pdfName.value = name
     pdfModal.value = true
   } catch (e) {
     pdfError.value = e.message; pdfSrc.value = ''; pdfModal.value = true
@@ -182,8 +182,8 @@ function exportCSV() {
     a.interview_type||'', a.remarks||''
   ]))
   const csv  = rows.map(r => r.map(c => `"${c}"`).join(',')).join('\n')
-  const el   = document.createElement('a')
-  el.href    = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }))
+  const el = document.createElement('a')
+  el.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }))
   el.download = 'applications.csv'; el.click()
 }
 
