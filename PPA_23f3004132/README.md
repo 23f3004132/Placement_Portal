@@ -10,6 +10,7 @@ A fully functional, production-ready campus placement management system.
 PPA_v2/
 └── code/
     ├── backend/
+    |   ├── __init__.py 
     │   ├── app.py                   
     │   ├── config.py                 
     │   ├── extensions.py             
